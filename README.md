@@ -4,12 +4,9 @@
 
 ## Getting started
 
-Yo bg !
-Voici le gitlab privé pour le développement de CELSIUS
+Développement de CELSIUS
 
 ## Init le projet
-
-Même si je pense que tout le monde sait
 
 ```
 cd existing_repo
@@ -57,8 +54,6 @@ Sinon soyez pas timides, vous m'appelez.
 📂 Drive GPE : https://drive.google.com/drive/folders/1O9uLnfrEpbCug2HrgKtP3tpfyVlD6wRc?usp=sharing
 
 🖊 Figma : https://www.figma.com/file/D4iN1JMy18Trx4jSIGcug7/GPE?type=design&node-id=161-46&mode=design
-
-☎ Numéro de tel de Aleks : 06 26 37 57 19
 
 ## Membres
 
