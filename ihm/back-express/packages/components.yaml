@@ -1,0 +1,321 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        role:
+          type: string
+          enum: [user, admin]
+      example:
+        id: 5ebac534954b54139806c112
+        email: fake@example.com
+        name: fake name
+        role: user
+
+    Token:
+      type: object
+      properties:
+        token:
+          type: string
+        expires:
+          type: string
+          format: date-time
+      example:
+        token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg
+        expires: 2020-05-12T16:18:04.793Z
+
+    AuthTokens:
+      type: object
+      properties:
+        access:
+          $ref: '#/components/schemas/Token'
+        refresh:
+          $ref: '#/components/schemas/Token'
+
+    UserWithTokens:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        tokens:
+          $ref: '#/components/schemas/AuthTokens'
+    DataCalendar:
+      type: object
+      properties:
+        date:
+          type: string
+        incident:
+          type: boolean
+        isCurrentMonth:
+          type: boolean
+        isToday:
+          type: boolean
+      example: [{ date: '2024-04-28T22:00:00.000Z', incident: true, isCurrentMonth: false, isToday: false }]
+    Data:
+      type: object
+      properties:
+        id:
+          type: string
+        co2:
+          type: number
+        temperature:
+          type: number
+        sensorId:
+          type: number
+        date:
+          type: string
+        heating:
+          type: boolean
+        presence:
+          type: boolean
+        incident:
+          type: boolean
+      example:
+        [
+          {
+            id: 5ebac534954b54139806c112,
+            co2: 154,
+            temperature: 22,
+            sensorId: 1,
+            date: 2024-05-12T16:18:04.793Z,
+            heating: false,
+            presence: true,
+            incident: false,
+          },
+        ]
+    Email:
+      type: object
+      properties:
+        id:
+          type: string
+        company:
+          type: string
+        captor:
+          type: string
+        data:
+          type: object
+      example:
+        [
+          {
+            id: 5ebac534954b54139806c112,
+            company: 5ebac534954b54139806c112,
+            captor: 5ebac534954b54139806c112,
+            data:
+              {
+                co2: 154,
+                temperature: 22,
+                sensorId: 1,
+                date: 2024-05-12T16:18:04.793Z,
+                heating: true,
+                presence: false,
+                incident: true,
+              },
+          },
+        ]
+
+    Room:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        companyId:
+          type: string
+        floor:
+          type: array
+        captors:
+          type: array
+        builging:
+          type: array
+      example:
+        id: 5ebac534954b54139806c112
+        name: fake room
+        companyId: 5ebac534954b54139806c112
+        floor: 5ebac534954b54139806c112
+        captors: [1, 2, 3, ...]
+        building: ['5ebac534954b54139806c112', '5ebac534954b54139806c112', '5ebac534954b54139806c112']
+
+    Floor:
+      type: object
+      properties:
+        id:
+          type: string
+        number:
+          type: string
+        companyId:
+          type: string
+        buildingId:
+          type: string
+        rooms:
+          type: Array
+      example:
+        id: 5ebac534954b54139806c112
+        name: fake floor
+        companyId: 5ebac534954b54139806c112
+        buildingId: 5ebac534954b54139806c112
+        rooms: ['5ebac534954b54139806c112', '5ebac534954b54139806c112', '5ebac534954b54139806c112']
+
+    Building:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        companyId:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+        floor:
+          type: Array
+      example:
+        id: 5ebac534954b54139806c112
+        name: fake building
+        companyId: 5ebac534954b54139806c112
+        address: fake address
+        city: fake city
+        postalCode: 75000
+        country: France
+        floor: ['5ebac534954b54139806c112', '5ebac534954b54139806c112', '5ebac534954b54139806c112']
+
+    CompanyUser:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        companyId:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+        building:
+          type: string[]
+        user:
+          type: array
+      example:
+        id: 5ebac534954b54139806c112
+        name: fake company
+        companyId: 5ebac534954b54139806c112
+        address: fake address
+        city: fake city
+        postalCode: 75000
+        country: France
+        building: ['5ebac534954b54139806c112', '5ebac534954b54139806c112', '5ebac534954b54139806c112']
+        user: [{ id: 5ebac534954b54139806c112, email: fakeemail@email.com, role: role, companyId: 5ebac534954b54139806c112 }]
+
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        companyId:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+        building:
+          type: Building[]
+        user:
+          type: Array
+      example:
+        id: 5ebac534954b54139806c112
+        name: fake company
+        companyId: 5ebac534954b54139806c112
+        address: fake address
+        city: fake city
+        postalCode: 75000
+        country: France
+        building:
+          [
+            {
+              id: 5ebac534954b54139806c112,
+              name: fake building,
+              companyId: 5ebac534954b54139806c112,
+              address: fake address,
+              city: fake city,
+              postalCode: 75000,
+              country: France,
+              floor: [5ebac534954b54139806c112, 5ebac534954b54139806c112, 5ebac534954b54139806c112],
+            },
+          ]
+        user: [5ebac534954b54139806c112, 5ebac534954b54139806c112, 5ebac534954b54139806c112]
+
+    Error:
+      type: object
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+
+  responses:
+    DuplicateEmail:
+      description: Email already taken
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 400
+            message: Email already taken
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 401
+            message: Please authenticate
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 403
+            message: Forbidden
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 404
+            message: Not found
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

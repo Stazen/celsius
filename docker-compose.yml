@@ -1,0 +1,113 @@
+version: '3.4'
+
+services:
+  nginx:
+    image: nginx:latest
+    restart: always
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/server.crt:/etc/nginx/certs/server.crt:ro
+      - ./nginx/server.key:/etc/nginx/certs/server.key:ro
+    networks:
+      - celsius-network # pour que les containers puissent communiquer entre eux
+    depends_on:
+      - ihm-front
+
+  # nginx-broker:
+  #   image: nginx:latest
+  #   restart: always
+  #   container_name: nginx-broker
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./nginx-broker/nginx.conf:/etc/nginx/nginx.conf:ro
+  #     - ./nginx-broker/server.crt:/etc/nginx/certs/server.crt:ro
+  #     - ./nginx-broker/server.key:/etc/nginx/certs/server.key:ro
+  #   networks:
+  #     - celsius-network # pour que les containers puissent communiquer entre eux
+
+  ihm-front:
+    restart: always
+    container_name: ihm-front # ça c'es juste le nom dans les logs
+    hostname : ihm-front # si vous voulez tapper sur ce container depuis un autre, utiliser ce hostname
+    build:
+      context: ./ihm/front-next/
+      dockerfile: ../../docker/next/Dockerfile
+    volumes:
+      - ./ihm/front-next/:/app/ # Lien entre les dossiers ./ihm/front-next de votre machine et /app/ du container
+      - /app/node_modules
+    ports:
+      - "3000:3000" # service accessible sur le port 80 de votre machine
+    networks:
+      - celsius-network # pour que les containers puissent communiquer entre eux
+
+  ihm-back:
+    restart: always
+    container_name: ihm-back # ça c'es juste le nom dans les logs
+    hostname : ihm-back # si vous voulez tapper sur ce container depuis un autre, utiliser ce hostname par ex : "curl http://ihm-back/v1/health"
+    build:
+      context: ./ihm/back-express/
+      dockerfile: ../../docker/express/Dockerfile
+    volumes:
+      - ./ihm/back-express/:/app/
+      - /app/node_modules
+    ports:
+      - "8000:8000"
+    networks:
+      - celsius-network
+
+  # agregator:
+  #   container_name: dotnet-agregator
+  #   restart: always
+  #   build:
+  #     context: ./agregator/dotnet/
+  #     dockerfile: ../../docker/dotnet/Dockerfile
+  #   environment:
+  #     - ASPNETCORE_URLS=http://+:80
+  #   volumes:
+  #     - ./agregator/dotnet/:/usr/src/app/
+  #   command: dotnet watch run
+  #   ports:
+  #     - "5001:5001"
+  #   networks:
+  #     - celsius-network
+
+  ################
+  # PROD ONLY !! #
+  # ################
+  # rabbitmq:
+  #   restart: always
+  #   hostname: rabbitmq
+  #   container_name: rabbitmq
+  #   build:
+  #     context: ./broker/
+  #     dockerfile: ../docker/rabbitmq/Dockerfile
+  #   ports:
+  #     - "1883:1883"
+  #     - "5672:5672"
+  #     - "8080:15672"
+  #     - "1885:15675"
+  #   # command: "/bin/bash -c \"rabbitmq-plugins enable --offline rabbitmq_mqtt rabbitmq_web_mqtt rabbitmq_amqp1_0; rabbitmq-server\""
+  #   command: "sh docker-entrypoint.sh"
+  #   env_file:
+  #     - ./broker/config/login.env
+  #   volumes:
+  #     - type: bind
+  #       source: ./broker/config/rabbitmq.conf
+  #       target: /etc/rabbitmq/rabbitmq.conf
+  #       read_only: true
+  #     - type: bind
+  #       source: ./broker/config/advanced.config
+  #       target: /etc/rabbitmq/advanced.config
+  #       read_only: true
+  #   networks:
+  #     - celsius-network
+
+networks:
+  celsius-network:
+      driver: "bridge"

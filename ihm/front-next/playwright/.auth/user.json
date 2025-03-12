@@ -1,0 +1,45 @@
+{
+  "cookies": [
+    {
+      "name": "next-auth.csrf-token",
+      "value": "c2b22ea81bc91c7a219803035ea8693e4498d289e3736f8ecd27fdb4b31881dc%7C10ef660d8851308ce9d5e76cd96819280c7e42031408a989ce8e141a013ac509",
+      "domain": "localhost",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "next-auth.callback-url",
+      "value": "http%3A%2F%2Flocalhost%3A3000%2Fsignin",
+      "domain": "localhost",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "next-auth.session-token",
+      "value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..9vpa26aFWOW8Q0z1.49MeW6QtbQH23FegAE6wtT4lEUSaRaOG3A4faLioWgkANV2gm5QhjYjZBqjQD3jjWbztgMdMdampYpyOK7GPHr2STBcdOLNoZS4ahSnqxELa1pZ2uyV5-TgJhT6M5U8-yt5Mvbsk3QbFypoEjqFexESSeOi9VnEAPX1B9NTCC5KCjEKo4I2lDbFcurGta9m0THsxHk4CaItJ-ib0d4IlWqtV1g7-HLTue940Irnv1106cHopwOXxhfIvCaZUp_MBsTC8e6vIzdYmTqJqfvtTG8U7OC0YOdZYWpCMzI1Xg5s8wpKmRIurbb9ULozf6xmR2p28-187UcvJOAw1FfsmTjkBafoHPWZZbUqQW7Rv7wGr1-0SUBKwVDeF7JFnujlxDO1vcxzB7f4hgw2ebbDlanmj65JWeafefOPE5obdi9QpwmfOs4ObeRSY2rX9QmC4oBTya_zzf8RygA7YzkWptAxz6QjkefPhQ9jPHhdHj05gGKZiGVhCpd1THG5WwQMIquQRa8Rasf7pcVJ6_eAsRX_iJ6vhNZjkkejtOr46CzqmXfhJMujTg3XmcYlBEyW-vBbF8CHdbECA1oF9LHVjwmaMmxI7PGc5h3Rcpw7VGv-0FhqpALjvF9SwdJxLlBMw_3jFGbaA9y4YxAtAI2qud1qVVshGQdpRpqvS0FHZED8fDmVfsfQ9OEMy__8eFmp4aVf8gD-1kVjktuZAfJOdg80jdkCnWCS4K0jZ7hyZxwJ4OEdZ0I6hQ8AW8ddQhowRi-6exL5KR99RnT-OmZlcBeeKcXTkYLuSO3k2clN7s7b0JRZZrD3PZOtz96D9nANx0dBBPGrqaUU9ocpOycmsIhJN2_MitYZjML6TkYB3tyf_kZSixssrYTMDBNxVP04jb8FeDUI3dZDRtIjeZTCJNcPP-uko---SvmgzXsqy8jaw0ddg3-0SFzEbI9H7ER0cSFzc_uqWv3W55tDAgoXnmW8fJECZsW5o3JPnrYMmepBk15voHldQ4ls9YIDlWavq6KqM0vjtfVnzrWzWbwk.jeY1zKGtnicnP7kyRUqt8w",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1721487754.054956,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "http://localhost:3000",
+      "localStorage": [
+        {
+          "name": "nextauth.message",
+          "value": "{\"event\":\"session\",\"data\":{\"trigger\":\"getSession\"},\"timestamp\":1718895753}"
+        }
+      ]
+    }
+  ]
+}
